@@ -6,6 +6,8 @@
   <title>{% block title %}{% endblock %}</title>
   {% load static %}
   {% load bootstrap5 %}
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'img/icon-sena.png' %}" sizes="32x32">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
@@ -39,7 +41,6 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'lista_aprendices' %}">Aprendices</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'aprendiz_create' %}">Nuevo</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Panel Administrativo</a></li>
           </ul>
           <form class="d-flex sena-search" role="search" action="{% url 'lista_aprendices' %}">
@@ -64,7 +65,7 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-12 col-md-4">
-          <h5 class="footer-title">Servicio Nacional de Aprendizaje - SENA</h5>
+          <h5 class="footer-title">Servicio Nacional de Aprendizaje</h5>
           <p class="small mb-2">"Formación profesional integral para la inclusión social y la productividad".</p>
           <p class="small mb-0">Centro Minero - Sogamoso<br>Cra. 9 #14-109, Sogamoso, Boyacá - Colombia</p>
         </div>
@@ -90,7 +91,7 @@
           <div class="d-flex gap-2">
             <span class="badge sena-badge">Calidad</span>
             <span class="badge sena-badge">Innovación</span>
-            <span class="badge sena-badge">Análisis y Desarrollo de Sistemas</span>
+            <span class="badge sena-badge">Talento</span>
           </div>
         </div>
       </div>
