@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Inicio - SENA Centro Minero
+    Incio - SENA APP Centro Minero
 {% endblock %}
 
 {% block content %}
@@ -16,26 +16,47 @@
     </div>
   </div>
   <div class="col-12 col-lg-6 text-center mt-4 mt-lg-0">
-    <img src="{% static 'img/sena-logo.png' %}" alt="SENA" class="hero-logo img-fluid" />
+    <div id="senaCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#senaCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#senaCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      </div>
+      <div class="carousel-inner rounded">
+        <div class="carousel-item active">
+          <img src="{% static 'img/aprendices-sena-1.png' %}" class="d-block w-100 carousel-photo" alt="Aprendices SENA 1">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'img/aprendices-sena-2.png' %}" class="d-block w-100 carousel-photo" alt="Aprendices SENA 2">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#senaCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#senaCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
   </div>
 </div>
 
 <div class="row g-4">
   <div class="col-12 col-md-4">
-    <div class="info-tile h-100">
-      <h5 class="mb-2">Calidad</h5>
+    <div class="info-tile h-100 fade-in-up pulse-on-hover">
+      <h5 class="mb-2"><i class="bi bi-award-fill text-accent"></i> Calidad</h5>
       <p class="small mb-0">Impulsamos estándares altos en la formación para mejorar la competitividad del sector minero.</p>
     </div>
   </div>
   <div class="col-12 col-md-4">
-    <div class="info-tile h-100">
-      <h5 class="mb-2">Innovación</h5>
+    <div class="info-tile h-100 fade-in-up pulse-on-hover">
+      <h5 class="mb-2"><i class="bi bi-lightbulb-fill text-accent"></i> Innovación</h5>
       <p class="small mb-0">Promovemos proyectos que integran tecnologías emergentes en procesos mineros sostenibles.</p>
     </div>
   </div>
   <div class="col-12 col-md-4">
-    <div class="info-tile h-100">
-      <h5 class="mb-2">Talento</h5>
+    <div class="info-tile h-100 fade-in-up pulse-on-hover">
+      <h5 class="mb-2"><i class="bi bi-people-fill text-accent"></i> Talento</h5>
       <p class="small mb-0">Formamos aprendices íntegros con competencias técnicas y actitud ética profesional.</p>
     </div>
   </div>

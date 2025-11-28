@@ -1,23 +1,58 @@
 {% extends 'base.html' %}
 {% block title %}Detalle Aprendiz{% endblock %}
 {% block content %}
-<h2>Detalle Aprendiz</h2>
-<div class="card">
+<div class="section-accent-top mb-4">
+  <h2 class="section-title d-flex align-items-center gap-2"><i class="bi bi-person-badge text-accent"></i> Perfil del Aprendiz</h2>
+  <p class="text-muted mb-0">Resumen de la información académica y de contacto.</p>
+</div>
+
+<div class="card shadow-sm border-0 fade-in-up">
+  <div class="card-header bg-accent-soft border-0 d-flex align-items-center gap-3">
+    <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center" style="width:48px;height:48px;">
+      <i class="bi bi-person-fill"></i>
+    </div>
+    <div>
+      <div class="h5 mb-0 fw-bold">{{ object.nombre }} {{ object.apellido }}</div>
+      <div class="small text-muted">Documento: {{ object.documento_identidad }}</div>
+    </div>
+    <div class="ms-auto d-flex flex-wrap gap-2">
+      <span class="badge sena-badge"><i class="bi bi-mortarboard"></i> {{ object.programa }}</span>
+      <span class="badge sena-badge"><i class="bi bi-geo-alt"></i> {{ object.ciudad }}</span>
+    </div>
+  </div>
   <div class="card-body">
-    <dl class="row">
-      <dt class="col-sm-3">Documento</dt><dd class="col-sm-9">{{ object.documento_identidad }}</dd>
-      <dt class="col-sm-3">Nombre</dt><dd class="col-sm-9">{{ object.nombre }}</dd>
-      <dt class="col-sm-3">Apellido</dt><dd class="col-sm-9">{{ object.apellido }}</dd>
-      <dt class="col-sm-3">Teléfono</dt><dd class="col-sm-9">{{ object.telefono }}</dd>
-      <dt class="col-sm-3">Correo</dt><dd class="col-sm-9">{{ object.correo }}</dd>
-      <dt class="col-sm-3">Fecha Nacimiento</dt><dd class="col-sm-9">{{ object.fecha_nacimiento }}</dd>
-      <dt class="col-sm-3">Ciudad</dt><dd class="col-sm-9">{{ object.ciudad }}</dd>
-      <dt class="col-sm-3">Programa</dt><dd class="col-sm-9">{{ object.programa }}</dd>
-    </dl>
-    <a href="{% url 'aprendiz_update' object.id %}" class="btn btn-warning">Editar</a>
-    <a href="{% url 'aprendiz_delete' object.id %}" class="btn btn-danger">Eliminar</a>
-    <a href="{% url 'lista_aprendices' %}" class="btn btn-secondary">Volver</a>
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <div class="info-tile h-100">
+          <h6 class="mb-2"><i class="bi bi-telephone text-accent"></i> Teléfono</h6>
+          <p class="mb-0">{{ object.telefono|default:'No registra' }}</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="info-tile h-100">
+          <h6 class="mb-2"><i class="bi bi-envelope text-accent"></i> Correo</h6>
+          <p class="mb-0">{{ object.correo|default:'No registra' }}</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="info-tile h-100">
+          <h6 class="mb-2"><i class="bi bi-calendar-event text-accent"></i> Fecha de Nacimiento</h6>
+          <p class="mb-0">{{ object.fecha_nacimiento|date:'Y-m-d' }}</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="info-tile h-100">
+          <h6 class="mb-2"><i class="bi bi-geo text-accent"></i> Ciudad</h6>
+          <p class="mb-0">{{ object.ciudad }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mt-4">
+      <a href="{% url 'aprendiz_update' object.id %}" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Editar</a>
+      <a href="{% url 'aprendiz_delete' object.id %}" class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
+      <a href="{% url 'lista_aprendices' %}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+    </div>
   </div>
 </div>
 {% endblock %}
-

@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}Eliminar Aprendiz{% endblock %}
 {% block content %}
-<h2>Eliminar Aprendiz</h2>
-<p>¿Estás seguro de que deseas eliminar al aprendiz <strong>{{ object }}</strong>?</p>
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-  <a href="{% url 'lista_aprendices' %}" class="btn btn-secondary">Cancelar</a>
-</form>
-{% endblock %}
+<div class="section-accent-top mb-4">
+  <h2 class="section-title">Eliminar Aprendiz</h2>
+  <p class="text-muted mb-0">Confirma si deseas eliminar este registro. Esta acción no se puede deshacer.</p>
+</div>
 
+<div class="card fade-in-up">
+  <div class="card-body">
+    <div class="alert alert-danger mb-3" role="alert">
+      ¿Estás seguro de que deseas eliminar al aprendiz <strong>{{ object }}</strong>?
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Sí, eliminar</button>
+      <a href="{% url 'lista_aprendices' %}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
