@@ -1,22 +1,26 @@
+/* Importar nueva fuente para todo el proyecto */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
 /* Estilos SENA institucional */
 :root {
+  /* Paleta verde renovada */
   --sena-green: #008C45; /* legado, por si se usa en algún lugar */
-  --sena-dark: #111111; /* más profundo */
-  --sena-light: #F5F2EB; /* beige claro para fondo */
-  --sena-accent: #f3640b; /* naranja principal */
-  --sena-accent-dark: #ec7c39; /* naranja más oscuro */
-  --sena-accent-soft: #FFF2E9; /* beige-naranja muy claro */
+  --sena-dark: #0b2b23; /* tono oscuro verde/neutro */
+  --sena-light: #f3faf6; /* fondo muy claro con matiz verde */
+  --sena-accent: #1b9c57; /* verde principal */
+  --sena-accent-dark: #0f6b3f; /* verde más oscuro para gradientes */
+  --sena-accent-soft: #eef9f0; /* muy sutil para inputs/backs */
 }
 
 body {
-  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
   background-color: var(--sena-light);
   color: var(--sena-dark);
 }
 
 /* Header y navegación con naranja institucional */
 .sena-header {
-  background: radial-gradient(120% 80% at 0% 0%, #9a3f12 0%, var(--sena-accent-dark) 40%, var(--sena-accent) 100%);
+  background: radial-gradient(120% 80% at 0% 0%, #0d582f 0%, var(--sena-accent-dark) 40%, var(--sena-accent) 100%);
   color: #fff;
   animation: headerSlide .5s ease-out both;
 }
@@ -38,7 +42,7 @@ body {
 /* Títulos de tarjetas en naranja y negrilla */
 .info-tile h5 { color: var(--sena-accent); font-weight: 800; letter-spacing: .2px; }
 
-/* Tarjetas informativas con brillo fosforescente al hover */
+/* Tarjetas informativas con brillo verde al hover */
 .info-tile {
   position: relative;
   overflow: hidden;
@@ -46,7 +50,7 @@ body {
 .info-tile::before {
   content: "";
   position: absolute; inset: 0;
-  background: radial-gradient(900px 240px at var(--mx, -20%) var(--my, -20%), rgba(243,100,11,.28), transparent 55%);
+  background: radial-gradient(900px 240px at var(--mx, -20%) var(--my, -20%), rgba(27,156,87,.28), transparent 55%);
   opacity: 0; transition: opacity .25s ease;
 }
 .info-tile:hover::before { opacity: 1; }
@@ -62,9 +66,13 @@ body {
   transform: translateX(220%) rotate(15deg);
 }
 /* Glow en borde al hover */
-.info-tile:hover { box-shadow: 0 12px 28px rgba(243,100,11,.32), 0 3px 12px rgba(0,0,0,.08); border-color: rgba(243,100,11,.55); transform: translateY(-3px); }
+.info-tile:hover {
+  box-shadow: 0 12px 28px rgba(27,156,87,.32), 0 3px 12px rgba(0,0,0,.08);
+  border-color: rgba(27,156,87,.55);
+  transform: translateY(-3px);
+}
 
-/* Tabla estilizada con header naranja */
+/* Tabla estilizada: header ahora en verde */
 .sena-table thead th {
   position: sticky;
   top: 0;
@@ -117,7 +125,7 @@ body {
 }
 .sena-search .btn-outline-light:hover { background: rgba(255,255,255,.15); }
 
-/* Botones: sustituir esquema azul por naranja/negro/beige sin tocar las clases en HTML */
+/* Botones: sustituir esquema naranja por verde sin cambiar las clases en HTML */
 .btn-primary {
   --bs-btn-color: #fff;
   --bs-btn-bg: var(--sena-accent);
@@ -126,8 +134,17 @@ body {
   --bs-btn-hover-border-color: var(--sena-accent-dark);
   --bs-btn-active-bg: var(--sena-accent-dark);
   --bs-btn-active-border-color: var(--sena-accent-dark);
-  --bs-btn-disabled-bg: #f0ad8e;
-  --bs-btn-disabled-border-color: #f0ad8e;
+  --bs-btn-disabled-bg: #c8e5d3;
+  --bs-btn-disabled-border-color: #c8e5d3;
+}
+.btn-primary {
+  box-shadow: 0 2px 8px rgba(27,156,87,.35);
+  background-image: linear-gradient(180deg, var(--sena-accent) 0%, var(--sena-accent-dark) 100%);
+  border: none;
+}
+.btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(27,156,87,.45);
+  filter: brightness(1.06);
 }
 
 .btn-outline-primary {
@@ -138,6 +155,8 @@ body {
   --bs-btn-hover-border-color: var(--sena-accent-dark);
   --bs-btn-active-bg: var(--sena-accent-dark);
   --bs-btn-active-border-color: var(--sena-accent-dark);
+  box-shadow: 0 1px 6px rgba(27,156,87,.25);
+  background: linear-gradient(180deg, rgba(27,156,87,.08), rgba(27,156,87,.16));
 }
 
 /* Variantes útiles acorde a paleta */
@@ -162,7 +181,7 @@ body {
 .section-accent-top { border-top: 4px solid var(--sena-accent); }
 
 /* Tablas con borde/acento en naranja */
-.table-hover > tbody > tr:hover > * { background-color: rgba(232, 109, 31, 0.06); }
+.table-hover > tbody > tr:hover > * { background-color: rgba(27,156,87,0.06); }
 
 /* Inputs y labels para coherencia cromática */
 .form-control, .form-select {
@@ -171,7 +190,7 @@ body {
 }
 .form-control:focus, .form-select:focus {
   border-color: var(--sena-accent);
-  box-shadow: 0 0 0 .2rem rgba(232,109,31,.25);
+  box-shadow: 0 0 0 .2rem rgba(27,156,87,.25);
 }
 .form-control.is-valid, .form-select.is-valid {
   border-color: #198754;
@@ -193,7 +212,7 @@ body {
 
 /* Campos del buscador (select + input) cohesionados */
 .sena-search .form-select.form-select-sm { background-color: var(--sena-accent-soft); border-color: var(--sena-accent-dark); color: var(--sena-dark); }
-.sena-search .form-select.form-select-sm:focus { border-color: var(--sena-accent); box-shadow: 0 0 0 .2rem rgba(232,109,31,.25); }
+.sena-search .form-select.form-select-sm:focus { border-color: var(--sena-accent); box-shadow: 0 0 0 .2rem rgba(27,156,87,.25); }
 
 /* Utilidades de espaciado/acento */
 .bg-accent-soft { background: var(--sena-accent-soft); }
@@ -215,17 +234,17 @@ body {
 .btn { transition: transform .08s ease, box-shadow .15s ease; }
 .btn:active { transform: translateY(1px); }
 .btn-primary {
-  box-shadow: 0 2px 8px rgba(204,94,28,.35);
+  box-shadow: 0 2px 8px rgba(27,156,87,.35);
   background-image: linear-gradient(180deg, var(--sena-accent) 0%, var(--sena-accent-dark) 100%);
   border: none;
 }
 .btn-primary:hover {
-  box-shadow: 0 4px 12px rgba(204,94,28,.45);
+  box-shadow: 0 4px 12px rgba(27,156,87,.45);
   filter: brightness(1.06);
 }
 .btn-outline-primary {
-  box-shadow: 0 1px 6px rgba(204,94,28,.25);
-  background: linear-gradient(180deg, rgba(236,124,57,.08), rgba(236,124,57,.16));
+  box-shadow: 0 1px 6px rgba(27,156,87,.25);
+  background: linear-gradient(180deg, rgba(27,156,87,.08), rgba(27,156,87,.16));
 }
 
 /* Formularios bonitos: estilo tipo floating-label sin cambiar HTML */
@@ -271,7 +290,7 @@ body {
 
 /* Nuevos estilos propuestos */
 .form-card { background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:1.1rem; padding:1.6rem 1.4rem; box-shadow:0 10px 30px rgba(0,0,0,.08); position:relative; overflow:hidden; }
-.form-card::before { content:""; position:absolute; inset:0; background:linear-gradient(140deg, rgba(243,100,11,.08), transparent 60%); opacity:.7; pointer-events:none; }
+.form-card::before { content:""; position:absolute; inset:0; background:linear-gradient(140deg, rgba(27,156,87,.08), transparent 60%); opacity:.7; pointer-events:none; }
 .icon-input .input-group-text { font-size:.9rem; }
 .icon-input .form-control { border-left:0; }
 .icon-input .input-group-text { border-right:0; }
