@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Detalle Programa | SENA APP{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow border-0 mb-4 animate-fade">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-semibold"><i class="bi bi-journal-medical me-2"></i>Detalle del Programa</h5>
+        <div class="d-flex gap-2">
+          <a href="{% url 'programa_update' programa.id %}" class="btn btn-sm btn-outline-light"><i class="bi bi-pencil-square"></i> Editar</a>
+          <a href="{% url 'programa_delete' programa.id %}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProgramaModal"><i class="bi bi-trash"></i> Eliminar</a>
+          <a href="{% url 'lista_programas' %}" class="btn btn-sm btn-outline-light"><i class="bi bi-arrow-left"></i> Volver</a>
+        </div>
+      </div>
+      <div class="card-body bg-light">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Identificación</h6>
+              <p class="mb-1"><span class="fw-semibold">Código:</span> {{ programa.codigo }}</p>
+              <p class="mb-1"><span class="fw-semibold">Nombre:</span> {{ programa.nombre }}</p>
+              <p class="mb-1"><span class="fw-semibold">Nivel:</span> {{ programa.get_nivel_formacion_display }}</p>
+              <p class="mb-0"><span class="fw-semibold">Modalidad:</span> {{ programa.get_modalidad_display }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Duración</h6>
+              <p class="mb-1"><span class="fw-semibold">Meses:</span> {{ programa.duracion_meses }}</p>
+              <p class="mb-1"><span class="fw-semibold">Horas:</span> {{ programa.duracion_horas }}</p>
+              <p class="mb-0"><span class="fw-semibold">Estado:</span> {{ programa.get_estado_display }}</p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Centro y Regional</h6>
+              <p class="mb-1"><span class="fw-semibold">Centro:</span> {{ programa.centro_formacion }}</p>
+              <p class="mb-0"><span class="fw-semibold">Regional:</span> {{ programa.regional }}</p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Descripción</h6>
+              <p class="mb-0">{{ programa.descripcion }}</p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Competencias</h6>
+              <p class="mb-0">{{ programa.competencias }}</p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Perfil de Egreso</h6>
+              <p class="mb-0">{{ programa.perfil_egreso }}</p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="p-3 rounded bg-white shadow-sm h-100">
+              <h6 class="text-uppercase text-muted small mb-2">Requisitos de Ingreso</h6>
+              <p class="mb-0">{{ programa.requisitos_ingreso }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="eliminarProgramaModal" tabindex="-1" aria-labelledby="eliminarProgramaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eliminarProgramaModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este programa? Esta acción no se puede deshacer.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <form action="{% url 'programa_delete' programa.id %}" method="post" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

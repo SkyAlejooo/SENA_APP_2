@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}{% if object %}Editar{% else %}Nuevo{% endif %} Programa{% endblock %}
+{% block content %}
+<div class="section-accent-top mb-4">
+  <h2 class="section-title d-flex align-items-center gap-2">
+    <i class="bi bi-journal-text text-accent"></i>
+    {% if object %}Editar{% else %}Nuevo{% endif %} Programa
+  </h2>
+  <p class="text-muted mb-0">Completa la información del programa de formación.</p>
+</div>
+
+<div class="form-card fade-in-up position-relative">
+  <form method="post" novalidate data-loading="true">
+    <div class="loading-overlay d-none">
+      <div class="spinner-border text-light" role="status"></div>
+      <p class="mt-2 mb-0 text-light fw-semibold">Guardando...</p>
+    </div>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors|striptags }}</div>
+    {% endif %}
+
+    <div class="row g-4">
+      {% for field in form %}
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          <div class="input-group input-group-sm icon-input">
+            {% if field.name == 'codigo' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-upc"></i></span>
+            {% elif field.name == 'nombre' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-journal"></i></span>
+            {% elif field.name == 'nivel_formacion' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-mortarboard"></i></span>
+            {% elif field.name == 'modalidad' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-laptop"></i></span>
+            {% elif field.name == 'duracion_meses' or field.name == 'duracion_horas' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-hourglass-split"></i></span>
+            {% elif field.name == 'centro_formacion' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-building"></i></span>
+            {% elif field.name == 'regional' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-geo"></i></span>
+            {% elif field.name == 'estado' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-toggle-on"></i></span>
+            {% elif field.name == 'fecha_creacion' %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-calendar-event"></i></span>
+            {% else %}
+              <span class="input-group-text bg-accent-soft border-accent"><i class="bi bi-pencil"></i></span>
+            {% endif %}
+            {{ field }}
+          </div>
+          {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+          {% if field.errors %}
+            <div class="text-danger small alert-sena-error mt-2">{{ field.errors|striptags }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-4 d-flex flex-wrap gap-2">
+      <button type="submit" class="btn btn-primary pulse-on-hover"><i class="bi bi-check2-circle"></i> Guardar</button>
+      <a href="{% url 'lista_programas' %}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+

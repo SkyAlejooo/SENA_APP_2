@@ -1,17 +1,14 @@
 (function(){
-  const tabla = document.getElementById('tablaAprendices');
-  if(!tabla) return;
-
   const searchInput = document.getElementById('aprendizSearch');
   const filtroPrograma = document.getElementById('filtroPrograma');
   const filtroCiudad = document.getElementById('filtroCiudad');
+  const tabla = document.getElementById('tablaAprendices');
+  const sortButtons = tabla ? tabla.querySelectorAll('button.table-sort') : [];
 
-  const sortButtons = tabla.querySelectorAll('button.table-sort');
-  let sortState = {};
+  if(!tabla) return;
 
-  // Poblar selects con valores únicos
-  (function populateFilters(){
-    if(!filtroPrograma || !filtroCiudad) return;
+  // Poblar filtros con valores únicos desde la tabla
+  (function populate(){
     const programas = new Set();
     const ciudades = new Set();
     tabla.querySelectorAll('tbody tr').forEach(tr=>{
@@ -20,42 +17,46 @@
       if(prog) programas.add(prog);
       if(ciu) ciudades.add(ciu);
     });
-    [...programas].sort().forEach(p=>{
-      const opt = document.createElement('option');
-      opt.value = p; opt.textContent = p; filtroPrograma.appendChild(opt);
-    });
-    [...ciudades].sort().forEach(c=>{
-      const opt = document.createElement('option');
-      opt.value = c; opt.textContent = c; filtroCiudad.appendChild(opt);
-    });
+    if(filtroPrograma){
+      [...programas].sort().forEach(p=>{
+        const opt = document.createElement('option'); opt.value=p; opt.textContent=p; filtroPrograma.appendChild(opt);
+      });
+    }
+    if(filtroCiudad){
+      [...ciudades].sort().forEach(c=>{
+        const opt = document.createElement('option'); opt.value=c; opt.textContent=c; filtroCiudad.appendChild(opt);
+      });
+    }
   })();
 
   function filtrar(){
-    const txt = (searchInput?.value || '').toLowerCase().trim();
-    const prog = (filtroPrograma?.value || '').toLowerCase();
-    const ciu = (filtroCiudad?.value || '').toLowerCase();
+    const txt = (searchInput?.value || '').toLowerCase();
+    const progFiltro = (filtroPrograma?.value || '').toLowerCase();
+    const ciudadFiltro = (filtroCiudad?.value || '').toLowerCase();
     tabla.querySelectorAll('tbody tr').forEach(tr=>{
       const doc = tr.children[0].textContent.toLowerCase();
       const nombre = tr.children[1].textContent.toLowerCase();
       const apellido = tr.children[2].textContent.toLowerCase();
-      const programa = (tr.getAttribute('data-programa')||'').toLowerCase();
-      const ciudad = (tr.getAttribute('data-ciudad')||'').toLowerCase();
+      const telefono = tr.children[3].textContent.toLowerCase();
+      const correo = tr.children[4].textContent.toLowerCase();
+      const ciudad = tr.getAttribute('data-ciudad')?.toLowerCase() || '';
+      const programa = tr.getAttribute('data-programa')?.toLowerCase() || '';
       let visible = true;
       if(txt){
-        visible = doc.includes(txt) || nombre.includes(txt) || apellido.includes(txt) || programa.includes(txt);
+        visible = doc.includes(txt) || nombre.includes(txt) || apellido.includes(txt) || telefono.includes(txt) || correo.includes(txt) || ciudad.includes(txt) || programa.includes(txt);
       }
-      if(visible && prog){ visible = programa === prog; }
-      if(visible && ciu){ visible = ciudad === ciu; }
+      if(visible && progFiltro){ visible = programa === progFiltro; }
+      if(visible && ciudadFiltro){ visible = ciudad === ciudadFiltro; }
       tr.style.display = visible ? '' : 'none';
     });
   }
 
   [searchInput, filtroPrograma, filtroCiudad].forEach(el=>{
-    if(!el) return;
-    el.addEventListener('input', filtrar);
-    el.addEventListener('change', filtrar);
+    el && el.addEventListener('input', filtrar);
+    el && el.addEventListener('change', filtrar);
   });
 
+  let sortState = {};
   function sortTable(colIndex){
     const tbody = tabla.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
@@ -63,11 +64,12 @@
     const nextDir = current === 'asc' ? 'desc' : 'asc';
     sortState[colIndex] = nextDir;
     rows.sort((a,b)=>{
-      // Omite filas ocultas? mantiene orden igualmente
       const aText = a.children[colIndex].textContent.trim().toLowerCase();
       const bText = b.children[colIndex].textContent.trim().toLowerCase();
-      if(!isNaN(aText) && !isNaN(bText)){
-        return nextDir === 'asc' ? (+aText - +bText) : (+bText - +aText);
+      const aNum = Number(aText);
+      const bNum = Number(bText);
+      if(!Number.isNaN(aNum) && !Number.isNaN(bNum)){
+        return nextDir === 'asc' ? (aNum - bNum) : (bNum - aNum);
       }
       if(aText < bText) return nextDir === 'asc' ? -1 : 1;
       if(aText > bText) return nextDir === 'asc' ? 1 : -1;
@@ -78,8 +80,16 @@
 
   sortButtons.forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      const col = +btn.getAttribute('data-col');
+      const col = parseInt(btn.getAttribute('data-col'));
       sortTable(col);
     });
   });
+
+  document.getElementById('refreshAprendices')?.addEventListener('click', ()=>{
+    if(searchInput) searchInput.value='';
+    if(filtroPrograma) filtroPrograma.value='';
+    if(filtroCiudad) filtroCiudad.value='';
+    filtrar();
+  });
 })();
+

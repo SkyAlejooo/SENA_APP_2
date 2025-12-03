@@ -42,15 +42,17 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'lista_aprendices' %}">Aprendices</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'lista_instructores' %}">Instructores</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'lista_programas' %}">Programas</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Panel Administrativo</a></li>
           </ul>
           <form class="d-flex sena-search" role="search" id="navbarSearchForm">
             <label for="q" class="visually-hidden">Buscar</label>
-            <input id="q" class="form-control form-control-sm me-2" type="search" placeholder="Buscar (Inicio, Aprendices, Instructores, Panel Administrativo)" list="navbarOptions" autocomplete="off">
+            <input id="q" class="form-control form-control-sm me-2" type="search" placeholder="Buscar (Inicio, Aprendices, Instructores, Programas, Panel Administrativo)" list="navbarOptions" autocomplete="off">
             <datalist id="navbarOptions">
               <option value="Inicio"></option>
               <option value="Aprendices"></option>
               <option value="Instructores"></option>
+              <option value="Programas"></option>
               <option value="Panel Administrativo"></option>
             </datalist>
             <button class="btn btn-sm btn-outline-light" type="submit"><i class="bi bi-search"></i> Buscar</button>
