@@ -33,7 +33,7 @@ Base inicial para una guía y plataforma Django que prioriza simplicidad, patró
 Centralizar procesos académicos usando un stack simple (Django + SQLite) facilitando aprendizaje rápido y futura escalabilidad.
 
 ## 👤 Autor
-Nombre: Andres Felipe Gonzalez Pedraza  
+Nombre: Nixon Alejandro Zapata Pérez
 Ficha: 2993648  
 Fecha: 28/11/2025  
 
