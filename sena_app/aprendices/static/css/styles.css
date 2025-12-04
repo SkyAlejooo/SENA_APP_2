@@ -10,6 +10,10 @@
   --sena-accent: #1b9c57; /* verde principal */
   --sena-accent-dark: #0f6b3f; /* verde más oscuro para gradientes */
   --sena-accent-soft: #eef9f0; /* muy sutil para inputs/backs */
+  /* Variables de movimiento */
+  --motion-fast: .18s;
+  --motion-medium: .28s;
+  --motion-smooth: cubic-bezier(.2,.9,.2,1);
 }
 
 body {
@@ -46,6 +50,11 @@ body {
 .info-tile {
   position: relative;
   overflow: hidden;
+  transition: transform var(--motion-medium) var(--motion-smooth), box-shadow var(--motion-medium), border-color var(--motion-medium);
+  will-change: transform, box-shadow;
+  transform-origin: center;
+  border-radius: .8rem;
+  background: linear-gradient(180deg, #ffffff, rgba(238,249,240,.9));
 }
 .info-tile::before {
   content: "";
@@ -60,16 +69,14 @@ body {
   position: absolute; top: -100%; left: -50%; width: 60%; height: 300%;
   background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
   transform: rotate(15deg);
-  transition: transform .8s ease;
+  transition: transform .85s cubic-bezier(.16,.95,.24,1), opacity .45s var(--motion-smooth);
+  opacity: .85;
 }
-.info-tile:hover::after {
-  transform: translateX(220%) rotate(15deg);
-}
+.info-tile:hover::after { transform: translateX(220%) rotate(15deg); opacity: .95; }
 /* Glow en borde al hover */
 .info-tile:hover {
-  box-shadow: 0 12px 28px rgba(27,156,87,.32), 0 3px 12px rgba(0,0,0,.08);
-  border-color: rgba(27,156,87,.55);
-  transform: translateY(-3px);
+  transform: translateY(-6px) rotate(-0.3deg) scale(1.01);
+  box-shadow: 0 18px 40px rgba(6,30,12,.16), 0 6px 16px rgba(0,0,0,.06);
 }
 
 /* Tabla estilizada: header ahora en verde */
@@ -304,3 +311,195 @@ body {
 .carousel-item { transition: transform .6s ease, opacity .6s ease; }
 .carousel-item.active { opacity: 1; }
 .carousel-item:not(.active) { opacity: .3; }
+
+/* Carousel compacto para el hero derecho (muestra las dos fotos con flechas) */
+.hero-compact-carousel {
+  width: 100%;
+  max-width: 420px; /* compacto y alineado con layout */
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,252,247,0.98));
+  border-radius: .8rem;
+  border: 1px solid rgba(6,30,12,.06);
+}
+.hero-compact-carousel .carousel-inner { border-radius: .6rem; }
+.hero-compact-carousel .carousel-photo {
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  border-radius: .6rem;
+  transition: transform .36s var(--motion-smooth), filter .28s var(--motion-smooth);
+}
+.hero-compact-carousel:hover .carousel-photo { transform: translateY(-4px); filter: brightness(1.02); }
+
+/* Asegurar controles visibles sobre el fondo verde oscuro */
+.hero-compact-carousel .carousel-control-prev-icon,
+.hero-compact-carousel .carousel-control-next-icon {
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.25));
+  background-size: 36px 36px;
+}
+
+/* ajustar tamaño en pantallas grandes/pequeñas */
+@media (min-width: 1200px) {
+  .hero-compact-carousel .carousel-photo { height: 300px; }
+}
+@media (max-width: 767px) {
+  .hero-compact-carousel { max-width: 360px; }
+  .hero-compact-carousel .carousel-photo { height: 200px; }
+}
+
+/* Evitar overflow horizontal del contenedor principal */
+.app-container { overflow-x: hidden; }
+
+/* Respecto a usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Enlaces: subrayado profesional animado (aplica a la mayoría de enlaces no-botón) */
+a:not(.btn) {
+  color: var(--sena-accent-dark);
+  text-decoration: none;
+  background-image: linear-gradient(90deg, var(--sena-accent) 0%, var(--sena-accent-dark) 100%);
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  transition: background-size var(--motion-medium) var(--motion-smooth), color var(--motion-fast) var(--motion-smooth);
+  text-underline-offset: 6px;
+  -webkit-tap-highlight-color: transparent;
+  will-change: background-size;
+}
+a:not(.btn):hover, a:not(.btn):focus {
+  background-size: 100% 2px;
+  color: var(--sena-dark);
+}
+
+/* Subrayado más fino para elementos de cabecera y títulos */
+.section-title, .sena-title, h1, h2, h3, h4, h5, h6 {
+  position: relative;
+  cursor: default;
+  transition: color var(--motion-fast) var(--motion-smooth);
+}
+.section-title::after {
+  /* ya existía; aseguramos suavidad */
+  transform-origin: left;
+  transition: transform var(--motion-medium) var(--motion-smooth), opacity var(--motion-medium);
+}
+.section-title:hover::after { transform: scaleX(1); opacity: 1; }
+
+/* Navbar: animación del underline y micro-movimiento al pasar el cursor */
+.sena-navbar .nav-link {
+  transition: transform var(--motion-fast) var(--motion-smooth), color var(--motion-fast);
+  will-change: transform;
+}
+.sena-navbar .nav-link:hover {
+  transform: translateY(-3px);
+  color: #fff;
+}
+
+/* Botones: animaciones sutiles y accesibles */
+.btn {
+  transition: transform var(--motion-fast) var(--motion-smooth), box-shadow var(--motion-medium) var(--motion-smooth), filter var(--motion-fast);
+  will-change: transform, box-shadow;
+}
+.btn:hover { transform: translateY(-3px) scale(1.01); }
+.btn:active { transform: translateY(0.5px) scale(.999); }
+
+/* Botones outline: efecto de relleno suave al hover */
+.btn-outline-primary, .btn-outline-warning, .btn-outline-danger, .btn-outline-dark {
+  position: relative;
+  overflow: hidden;
+}
+.btn-outline-primary::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(27,156,87,0.06), rgba(27,156,87,0.12));
+  opacity: 0;
+  transition: opacity var(--motion-medium) var(--motion-smooth), transform var(--motion-medium);
+  pointer-events: none;
+}
+.btn-outline-primary:hover::before { opacity: 1; }
+
+/* Iconos: movimiento discreto */
+.bi {
+  transition: transform var(--motion-medium) var(--motion-smooth), color var(--motion-medium);
+  display: inline-block;
+  will-change: transform;
+}
+.info-tile:hover .bi, .btn:hover .bi { transform: translateY(-4px) rotate(-6deg); color: var(--sena-accent-dark); }
+
+/* Tabla: hover con slide y transición de color en celdas */
+.sena-table tbody tr {
+  transition: background-color var(--motion-medium) var(--motion-smooth), transform var(--motion-medium);
+  will-change: background-color, transform;
+}
+.sena-table tbody tr:hover { transform: translateX(6px); background-color: rgba(27,156,87,0.04); }
+
+/* Badges: pulso suave al hover */
+.sena-badge {
+  transition: transform var(--motion-medium) var(--motion-smooth), box-shadow var(--motion-medium);
+}
+.sena-badge:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 18px rgba(27,156,87,.12); }
+
+/* Hero title: text gradient y ligero desplazamiento en hover */
+.sena-title {
+  background: linear-gradient(90deg, var(--sena-accent-dark), var(--sena-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: transform var(--motion-medium), filter var(--motion-medium);
+}
+.sena-title:hover { transform: translateY(-4px); filter: drop-shadow(0 6px 18px rgba(27,156,87,.12)); }
+
+/* Formularios: etiquetas que suben con micro-animación (ya simuladas), se suaviza */
+.form-label { transition: transform var(--motion-medium) var(--motion-smooth), opacity var(--motion-medium); }
+
+/* Floating inputs: foco más marcado */
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 8px 30px rgba(27,156,87,.08);
+  transform-origin: left center;
+}
+
+/* Modal: entrada suave */
+.modal.fade .modal-dialog { transition: transform .36s var(--motion-smooth), opacity .26s var(--motion-smooth); transform: translateY(8px); }
+.modal.fade.show .modal-dialog { transform: translateY(0); }
+
+/* Pulsos sutiles para elementos que ya usan pulse-on-hover (evitar sobresaturación) */
+.pulse-on-hover:hover { animation: subtlePulse .9s ease-in-out 1; }
+
+/* Utility: mejorar contraste y legibilidad de small text en cards */
+.card .small, .card .text-muted { color: rgba(7,24,19,.72); }
+
+/* Últimos ajustes: mejorar rendimiento visual */
+* { backface-visibility: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* ===== Estilos específicos para la nueva vista de INICIO ===== */
+.home-hero { align-items: center; gap: 1.5rem; }
+@media (min-width: 992px) {
+  .home-hero .col-lg-7 { flex: 0 0 58%; max-width: 58%; }
+  .home-hero .col-lg-5 { flex: 0 0 40%; max-width: 40%; display:flex; align-items:center; justify-content:center; }
+}
+
+/* ===== Ajustes tras eliminar thumbnails dentro de las acciones ===== */
+/* Alineamos actions de forma ordenada y centrada */
+.home-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .9rem;
+  max-width: 760px;
+  margin: .75rem auto 0 auto;
+  justify-items: stretch;
+}
+@media (min-width: 992px) {
+  .home-actions { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+}
+
+/* Asegurar que cada action-card ocupe su espacio y se vea centrado */
+.action-card { width: 100%; align-items: center; }
+
+/* Fallback: ocultar cualquier imagen residual dentro de .home-actions (no toca lógica) */
+.home-actions img { display: none !important; width: 0 !important; height: 0 !important; }
+
+/* Eliminadas las reglas de .action-row/.action-thumb porque ya no se usan */

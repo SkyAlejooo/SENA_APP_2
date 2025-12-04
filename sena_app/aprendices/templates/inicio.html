@@ -6,45 +6,95 @@
 {% endblock %}
 
 {% block content %}
-<div class="row align-items-center mb-5">
-  <div class="col-12 col-lg-6">
-    <h1 class="display-6 fw-bold sena-title">Gestión Académica</h1>
-    <p class="lead text-secondary">Herramienta interna para administrar información del Centro Minero de Sogamoso.</p>
+<div class="home-hero row align-items-center gy-4 mb-5">
+  <div class="col-12 col-lg-7">
+    <div class="hero-panel p-4 p-md-5 rounded-3">
+      <h1 class="display-6 fw-bold sena-title">Gestión Académica</h1>
+      <p class="lead text-secondary">Herramienta interna para administrar información del Centro Minero de Sogamoso.</p>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
-      <a href="{% url 'lista_aprendices' %}" class="btn btn-primary btn-lg shadow-sm">Ver Aprendices</a>
-      <a href="{% url 'aprendiz_create' %}" class="btn btn-outline-primary btn-lg">Registrar Aprendiz</a>
-    </div>
+      <p class="small text-muted mb-3">Accede rápido a las secciones más usadas. Animaciones y accesibilidad preservadas.</p>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
-      <a href="{% url 'lista_instructores' %}" class="btn btn-primary btn-lg shadow-sm">Ver Instructores</a>
-      <a href="{% url 'instructor_create' %}" class="btn btn-outline-primary btn-lg">Registrar Instructor</a>
-    </div>
+      <div class="home-actions d-grid gap-3">
+        <!-- Agrupado: acción + thumbnail AL LADO (fuera del <a>) -->
+        <div class="action-row d-flex align-items-center gap-3">
+          <a href="{% url 'lista_aprendices' %}" class="action-card d-flex align-items-center gap-3 p-3 rounded text-decoration-none" aria-label="Ver Aprendices">
+            <div class="action-icon bg-accent-soft rounded-3 d-flex align-items-center justify-content-center"><i class="bi bi-people-fill text-accent fs-4"></i></div>
+            <div>
+              <div class="h6 mb-0 action-title">Ver Aprendices</div>
+              <div class="small text-muted">Listado completo y gestión de aprendices</div>
+            </div>
+            <div class="ms-auto text-muted"><i class="bi bi-arrow-right-short fs-3"></i></div>
+          </a>
+        </div>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
-      <a href="{% url 'lista_programas' %}" class="btn btn-primary btn-lg shadow-sm">Ver Programas</a>
-      <a href="{% url 'programa_create' %}" class="btn btn-outline-primary btn-lg">Registrar Programa</a>
+        <a href="{% url 'aprendiz_create' %}" class="action-card d-flex align-items-center gap-3 p-3 rounded text-decoration-none" aria-label="Registrar Aprendiz">
+          <div class="action-icon bg-accent-soft rounded-3 d-flex align-items-center justify-content-center"><i class="bi bi-person-plus text-accent fs-4"></i></div>
+          <div>
+            <div class="h6 mb-0 action-title">Registrar Aprendiz</div>
+            <div class="small text-muted">Crear un nuevo registro rápidamente</div>
+          </div>
+          <div class="ms-auto text-muted"><i class="bi bi-arrow-right-short fs-3"></i></div>
+        </a>
+
+        <!-- Agrupado: acción + thumbnail AL LADO (fuera del <a>) -->
+        <div class="action-row d-flex align-items-center gap-3">
+          <a href="{% url 'lista_instructores' %}" class="action-card d-flex align-items-center gap-3 p-3 rounded text-decoration-none" aria-label="Ver Instructores">
+            <div class="action-icon bg-accent-soft rounded-3 d-flex align-items-center justify-content-center"><i class="bi bi-briefcase-fill text-accent fs-4"></i></div>
+            <div>
+              <div class="h6 mb-0 action-title">Ver Instructores</div>
+              <div class="small text-muted">Consulta perfiles y asignaciones</div>
+            </div>
+            <div class="ms-auto text-muted"><i class="bi bi-arrow-right-short fs-3"></i></div>
+          </a>
+        </div>
+
+        <a href="{% url 'instructor_create' %}" class="action-card d-flex align-items-center gap-3 p-3 rounded text-decoration-none" aria-label="Registrar Instructor">
+          <div class="action-icon bg-accent-soft rounded-3 d-flex align-items-center justify-content-center"><i class="bi bi-person-badge text-accent fs-4"></i></div>
+          <div>
+            <div class="h6 mb-0 action-title">Registrar Instructor</div>
+            <div class="small text-muted">Agregar nuevo instructor</div>
+          </div>
+          <div class="ms-auto text-muted"><i class="bi bi-arrow-right-short fs-3"></i></div>
+        </a>
+
+        <a href="{% url 'lista_programas' %}" class="action-card d-flex align-items-center gap-3 p-3 rounded text-decoration-none" aria-label="Ver Programas">
+          <div class="action-icon bg-accent-soft rounded-3 d-flex align-items-center justify-content-center"><i class="bi bi-journal-bookmark-fill text-accent fs-4"></i></div>
+          <div>
+            <div class="h6 mb-0 action-title">Ver Programas</div>
+            <div class="small text-muted">Catálogo de programas formativos</div>
+          </div>
+          <div class="ms-auto text-muted"><i class="bi bi-arrow-right-short fs-3"></i></div>
+        </a>
+
+        <a href="{% url 'programa_create' %}" class="action-card d-flex align-items-center gap-3 p-3 rounded text-decoration-none" aria-label="Registrar Programa">
+          <div class="action-icon bg-accent-soft rounded-3 d-flex align-items-center justify-content-center"><i class="bi bi-bookmark-plus-fill text-accent fs-4"></i></div>
+          <div>
+            <div class="h6 mb-0 action-title">Registrar Programa</div>
+            <div class="small text-muted">Agregar nuevo programa formativo</div>
+          </div>
+          <div class="ms-auto text-muted"><i class="bi bi-arrow-right-short fs-3"></i></div>
+        </a>
+      </div>
     </div>
   </div>
-  <div class="col-12 col-lg-6 text-center mt-4 mt-lg-0">
-    <div id="senaCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#senaCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#senaCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      </div>
+
+  <!-- Reemplazado: imagen estática -> pequeño carousel con las dos fotos y flechas -->
+  <div class="col-12 col-lg-5 d-flex justify-content-center">
+    <div id="senaHeroCarousel" class="carousel slide hero-compact-carousel shadow-sm rounded" data-bs-ride="carousel">
       <div class="carousel-inner rounded">
         <div class="carousel-item active">
-          <img src="{% static 'img/aprendices-sena-1.png' %}" class="d-block w-100 carousel-photo" alt="Aprendices SENA 1">
+          <img src="{% static 'img/aprendices-sena-1.png' %}" class="d-block w-100 carousel-photo" alt="Aprendices 1">
         </div>
         <div class="carousel-item">
-          <img src="{% static 'img/aprendices-sena-2.png' %}" class="d-block w-100 carousel-photo" alt="Aprendices SENA 2">
+          <img src="{% static 'img/aprendices-sena-2.png' %}" class="d-block w-100 carousel-photo" alt="Aprendices 2">
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#senaCarousel" data-bs-slide="prev">
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#senaHeroCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Anterior</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#senaCarousel" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#senaHeroCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Siguiente</span>
       </button>
